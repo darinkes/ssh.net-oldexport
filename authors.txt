@@ -1,0 +1,7 @@
+SND\drieseng_cp = drieseng <drieseng@codeplex.com>
+SND\olegkap_cp = olegkap <olegkap@codeplex.com>
+SND\Kenneth_aa_cp = Kenneth_aa <Kenneth_aa@codeplex.com>
+SND\GiantJunkBox_cp = GiantJunkBox <GiantJunkBox@codeplex.com>
+vstfs:///Framework/IdentityDomain/91bfc952-fec6-4be4-b192-9eb3b8389945\Project Collection Service Accounts = Project Collection Service Accounts <blabla@codeplex.com>
+SND\diehardvn_cp = diehardvn <diehardvn@codeplex.com>
+RNO\_MCLWEB = mclweb <mclweb@codeplex.com>

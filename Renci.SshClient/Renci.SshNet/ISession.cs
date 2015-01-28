@@ -211,6 +211,8 @@ namespace Renci.SshNet
         /// </summary>
         event EventHandler<HostKeyEventArgs> HostKeyReceived;
 
+        event EventHandler<LogEventArgs> LogAdded;
+
         /// <summary>
         /// Occurs when <see cref="RequestSuccessMessage"/> message received
         /// </summary>

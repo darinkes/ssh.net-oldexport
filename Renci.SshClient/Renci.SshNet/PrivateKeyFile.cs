@@ -114,6 +114,11 @@ namespace Renci.SshNet
             Open(privateKey, passPhrase);
         }
 
+        public static bool PrivateKeyIsValid(string key)
+        {
+            return PrivateKeyRegex.Match(key).Success;
+        }
+
         /// <summary>
         /// Opens the specified private key.
         /// </summary>

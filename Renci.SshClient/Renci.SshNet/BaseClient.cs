@@ -134,6 +134,8 @@ namespace Renci.SshNet
         /// </example>
         public event EventHandler<HostKeyEventArgs> HostKeyReceived;
 
+        public event EventHandler<LogEventArgs> LogAdded;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseClient"/> class.
         /// </summary>
@@ -210,6 +212,7 @@ namespace Renci.SshNet
             Session = _serviceFactory.CreateSession(ConnectionInfo);
             Session.HostKeyReceived += Session_HostKeyReceived;
             Session.ErrorOccured += Session_ErrorOccured;
+            Session.LogAdded += Session_LogAdded;
             Session.Connect();
             StartKeepAliveTimer();
             OnConnected();
@@ -236,6 +239,7 @@ namespace Renci.SshNet
                 // dereference the current session here
                 Session.ErrorOccured -= Session_ErrorOccured;
                 Session.HostKeyReceived -= Session_HostKeyReceived;
+                Session.LogAdded -= Session_LogAdded;
                 Session.Disconnect();
                 Session.Dispose();
                 Session = null;
@@ -302,6 +306,15 @@ namespace Renci.SshNet
         private void Session_HostKeyReceived(object sender, HostKeyEventArgs e)
         {
             var handler = HostKeyReceived;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
+        void Session_LogAdded(object sender, LogEventArgs e)
+        {
+            var handler = this.LogAdded;
             if (handler != null)
             {
                 handler(this, e);

@@ -1,4 +1,5 @@
-﻿using System.Net.Sockets;
+﻿using System;
+using System.Net.Sockets;
 
 namespace Renci.SshNet.Channels
 {
@@ -14,7 +15,14 @@ namespace Renci.SshNet.Channels
 
         partial void InternalSocketSend(byte[] data)
         {
-            this._socket.Send(data, 0, data.Length, SocketFlags.None);
+            try
+            {
+                this._socket.Send(data, 0, data.Length, SocketFlags.None);
+            }
+            catch (Exception exception)
+            {
+                // XXX: ignore/log?
+            }
         }
     }
 }

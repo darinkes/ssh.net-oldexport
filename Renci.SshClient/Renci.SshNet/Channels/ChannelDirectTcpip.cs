@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -172,8 +173,9 @@ namespace Renci.SshNet.Channels
             {
                 if (_socket == null || !_socket.Connected)
                     return;
-
+                Debug.WriteLine("Socket Shutdown");
                 _socket.Shutdown(how);
+                Debug.WriteLine("Socket Shutdown done");
             }
         }
 

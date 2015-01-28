@@ -13,6 +13,8 @@ namespace Renci.SshNet
 {
     public partial class Session
     {
+        public event EventHandler<LogEventArgs> LogAdded;
+
         private const byte Null = 0x00;
         private const byte CarriageReturn = 0x0d;
         private const byte LineFeed = 0x0a;
@@ -267,10 +269,11 @@ namespace Renci.SshNet
             } while (totalBytesSent < totalBytesToSend);
         }
 
-        [Conditional("DEBUG")]
         partial void Log(string text)
         {
-            _log.TraceEvent(TraceEventType.Verbose, 1, text);
+            //this._log.TraceEvent(System.Diagnostics.TraceEventType.Verbose, 1, text);
+            if (LogAdded != null)
+                LogAdded(this, new LogEventArgs("Debug", text));
         }
 
 #if ASYNC_SOCKET_READ

@@ -59,6 +59,7 @@ namespace Renci.SshNet
                     finally
                     {
                         // mark listener stopped
+                        Debug.WriteLine("_listenerTaskCompleted.Set();");
                         _listenerTaskCompleted.Set();
                     }
                 });
@@ -98,6 +99,11 @@ namespace Renci.SshNet
                 {
                     channel.Exception += Channel_Exception;
                     channel.Open(Host, Port, this, clientSocket);
+                    if (!channel.IsOpen)
+                    {
+                        clientSocket.Close();
+                        throw new SshException("Unable to open Channel for LocalForwarding");
+                    }
                     channel.Bind();
                     channel.Close();
                 }
@@ -115,6 +121,7 @@ namespace Renci.SshNet
 
         private static void CloseSocket(Socket socket)
         {
+            Debug.WriteLine("CloseSocket");
             if (socket.Connected)
             {
                 socket.Shutdown(SocketShutdown.Both);
@@ -162,7 +169,9 @@ namespace Renci.SshNet
             // close listener socket
             _listener.Close();
             // wait for listener loop to finish
+            Debug.WriteLine("Listener Wait");
             _listenerTaskCompleted.WaitOne();
+            Debug.WriteLine("Listener Stop");
         }
 
         private void Session_ErrorOccured(object sender, ExceptionEventArgs e)

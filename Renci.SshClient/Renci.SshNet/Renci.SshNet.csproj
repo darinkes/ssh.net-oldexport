@@ -90,6 +90,7 @@
     <Compile Include="Common\ChannelOpenFailedEventArgs.cs" />
     <Compile Include="Common\ChannelRequestEventArgs.cs" />
     <Compile Include="Common\Extensions.NET.cs" />
+    <Compile Include="Common\LogEventArgs.cs" />
     <Compile Include="Common\ProxyException.cs">
       <SubType>Code</SubType>
     </Compile>

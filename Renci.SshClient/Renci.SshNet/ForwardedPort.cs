@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Renci.SshNet.Common;
 
 namespace Renci.SshNet
@@ -76,6 +77,8 @@ namespace Renci.SshNet
             if (!IsStarted)
                 return;
 
+            RaiseClosing();
+
             StopPort(Session.ConnectionInfo.Timeout);
         }
 
@@ -91,8 +94,6 @@ namespace Renci.SshNet
         /// <param name="timeout">The maximum amount of time to wait for pending requests to finish processing.</param>
         protected virtual void StopPort(TimeSpan timeout)
         {
-            RaiseClosing();
-
             if (Session != null)
             {
                 Session.ErrorOccured -= Session_ErrorOccured;
@@ -154,6 +155,7 @@ namespace Renci.SshNet
         /// </summary>
         private void RaiseClosing()
         {
+            Debug.WriteLine("RaiseClosing()");
             var handlers = Closing;
             if (handlers != null)
             {

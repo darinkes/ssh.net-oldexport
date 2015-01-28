@@ -178,11 +178,13 @@ namespace Renci.SshNet
 
         private static void CloseSocket(Socket socket)
         {
+            Debug.WriteLine("CloseSocket");
             if (socket.Connected)
             {
                 socket.Shutdown(SocketShutdown.Both);
                 socket.Close();
             }
+            Debug.WriteLine("CloseSocket Done");
         }
 
         partial void StopListener()

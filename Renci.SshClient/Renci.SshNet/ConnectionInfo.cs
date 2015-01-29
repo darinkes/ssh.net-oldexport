@@ -309,6 +309,7 @@ namespace Renci.SshNet
 
             Encryptions = new Dictionary<string, CipherInfo>
                 {
+                    {"aes128-ctr", new CipherInfo(128, (key, iv) => new AesCipher(key, new CtrCipherMode(iv), null))},
                     {"aes256-ctr", new CipherInfo(256, (key, iv) => new AesCipher(key, new CtrCipherMode(iv), null))},
                     {"3des-cbc", new CipherInfo(192, (key, iv) => new TripleDesCipher(key, new CbcCipherMode(iv), null))},
                     {"aes128-cbc", new CipherInfo(128, (key, iv) => new AesCipher(key, new CbcCipherMode(iv), null))},
@@ -328,15 +329,13 @@ namespace Renci.SshNet
                     ////{"idea-cbc", typeof(...)},
                     {"cast128-cbc", new CipherInfo(128, (key, iv) => new CastCipher(key, new CbcCipherMode(iv), null))},
                     ////{"rijndael-cbc@lysator.liu.se", typeof(...)},                
-                    {"aes128-ctr", new CipherInfo(128, (key, iv) => new AesCipher(key, new CtrCipherMode(iv), null))},
                     {"aes192-ctr", new CipherInfo(192, (key, iv) => new AesCipher(key, new CtrCipherMode(iv), null))},
                 };
 
             HmacAlgorithms = new Dictionary<string, HashInfo>
                 {
-                    {"hmac-md5", new HashInfo(16*8, key => new HMac<MD5Hash>(key))},
-                    {"hmac-sha1", new HashInfo(20*8, key => new HMac<SHA1Hash>(key))},
                     {"hmac-sha2-256", new HashInfo(32*8, key => new HMac<SHA256Hash>(key))},
+                    {"hmac-sha1", new HashInfo(20*8, key => new HMac<SHA1Hash>(key))},
                     {"hmac-sha2-256-96", new HashInfo(32*8, key => new HMac<SHA256Hash>(key, 96))},
                     //{"hmac-sha2-512", new HashInfo(64 * 8, key => new HMac<SHA512Hash>(key))},
                     //{"hmac-sha2-512-96", new HashInfo(64 * 8,  key => new HMac<SHA512Hash>(key, 96))},
@@ -345,6 +344,7 @@ namespace Renci.SshNet
                     {"hmac-ripemd160@openssh.com", new HashInfo(160, key => new HMac<RIPEMD160Hash>(key))},
                     {"hmac-md5-96", new HashInfo(16*8, key => new HMac<MD5Hash>(key, 96))},
                     {"hmac-sha1-96", new HashInfo(20*8, key => new HMac<SHA1Hash>(key, 96))},
+                    {"hmac-md5", new HashInfo(16*8, key => new HMac<MD5Hash>(key))},
                     //{"none", typeof(...)},
                 };
 

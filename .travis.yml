@@ -1,0 +1,2 @@
+language: csharp
+solution: Renci.SshClient/Renci.SshNet.XBuild.sln

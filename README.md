@@ -1,6 +1,8 @@
 ssh.net
 =======
 
+[![Build Status](https://travis-ci.org/darinkes/ssh.net.svg?branch=master)](https://travis-ci.org/darinkes/ssh.net)
+
 git export of https://sshnet.codeplex.com/
 
 
